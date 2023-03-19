@@ -1,7 +1,5 @@
 # Inverse Kinematics with Obstacle Avoidance by Cost Minimization
 
-
-##
 ## Overview
 
 These notes describe a method for creating an animation of a robot arm by (iteratively) minimizing a cost function. This is a path-planning solution that minimizes a multi-objective cost function.  The arm will move from an initial position to a set of multiple goal positions. As the arm moves, it should  avoid collisions with the various obstacles in the scene. The original method is from Breen's paper [1]. Figure 1 shows a pose of the robot arm as it moves from one target location to another. 
@@ -281,19 +279,30 @@ $$
           \label{Delta_e_beta}
 \end{align}
 $$
-with $\lambda \in \left[0, 1\right]$. The basic Jacobian inverse-kinematics algorithm is listed in Algorithm \ref{algo_grad_descent_jacobian}. The diagram in Figure 4 shows an analogy between the Jacobian gradient-descent method in and the gradient-descent method for a scalar function of a scalar variable. 
+with $\lambda \in \left[0, 1\right]$. The basic Jacobian inverse-kinematics algorithm is listed in Algorithm 1. The diagram in Figure 4 shows an analogy between the Jacobian gradient-descent method in and the gradient-descent method for a scalar function of a scalar variable. 
 
 ![ik_jacobian](figs/ik_jacobian.png)
 
 **Figure 4:** Jacobian Inverse Kinematics. Simplified diagram using a 1-D function to represent the forward kinematics cost function. 
 
-### The algorithm
+### The inverse-kinematics algorithm
 
 ![ik_algorithm](figs/ik_algorithm.png)
 
+**Algorithm 1**: Inverse Kinematics Gradient Descent. 
 
+### Minimizing the cost-function to create the animation 
 
+By using the procedure described in Algorithm 1, we can create a simple animation of the robot arm. However, this animation would be unconstrained as it would not minimize the cost function in Equation $\ref{simple_motion}$. To  minimize the cost function that controls the animation, we can use a two-step approach. In the first step, we calculate the direction of minimal cost, which is to where we want to move the arm. In the second step, we move the arm in that direction by a fraction along the direction of minimal cost . The two steps require computations of inverse kinematics using Algorithm 1, and is illustrated in Figure 5.
 
+![implicit_grad](figs/implicit_grad.png)
+
+**Figure 5:** Computing the direction of minimal cost. First, use inverse kinematics to compute the joint angles ${\bf \Phi}_x, {\bf \Phi}_y, {\bf \Phi}_z$ that would take the end-effector to nearby locations ${\bf e} + \Delta x$, ${\bf e} + \Delta y$, and ${\bf e} + \Delta z$.  Then, compute  costs $C\left({\bf \Phi}_x\right), C\left({\bf \Phi}_y\right), C\left({\bf \Phi}_z\right)$ at those locations. Next, create vector 
+	${\bf d} = \left(C\left({\bf \Phi}_x\right), C\left({\bf \Phi}_y\right), C\left({\bf \Phi}_z\right)\right)^\mathsf{T}$. Its reciprocal (i.e., $-{\bf d}$) is the direction of minimal cost. The next (incremental) location of ${\bf e}$ in the animation is given by ${\bf g}_\text{new} = {\bf e} - {\bf d}$. Finally, move the arm towards location ${\bf g}_\text{new}$ using inverse kinematics.
+
+![algorithmAnimation](figs/algorithmAnimation.png)
+
+**Algorithm 2:** Animation with cost-function minimization
 
 ## References
 
