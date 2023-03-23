@@ -76,7 +76,7 @@ $$
 		\ln\left(\delta/\left(\phi_\text{max} - \phi\right)\right), & \phi_\text{max} - \delta \leq \phi < \phi_\text{max},\\
 	\end{cases}
 	\label{limit_function}
-\end{align}	
+\end{align}
 $$
 where $\phi$ is the joint angle, $\phi_\text{min}$ and $\phi_\text{max}$ are the limits of that joint, and $\delta$ is the angular distance from each of the limits after which the limit function vanishes.  Figure 3 shows an example of the limit function for $\delta = 45\degree$, $\phi_{\text{min}} = 90\degree$, and $\phi_{\text{max}} = 270\degree$.
 
@@ -103,7 +103,7 @@ One numerical method used for computing inverse kinematics works is based on the
 
 The path obtained by the gradient-descent solution is the path of the animation. Here, we want to determine how incremental changes of joint-angle configuration relate to incremental changes of end-effector location, i.e.,  we want to find out how to relate changes in any component of ${\bf \Phi}$ with changes in any component of ${\bf e}$. With this relationship at hand, we can derive an iterative algorithm analogous to the gradient-descent to calculate the arm's pose needed to reach a given location.
 
-#### Relating variations of pose to  variations of end-effector location
+#### Relating variations of pose to variations of end-effector location
 
 To relate small changes between values of a function and small variations of its variables, we can use derivatives. Indeed, the derivative of forward-kinematics function, $d{\bf e}/d{\bf \Phi}$, contains all the information we need to know about how to relate changes in any component of $\bf \Phi$ to changes in any component of ${\bf e}$.  Because the forward-kinematics function ${\bf e}$ is a vector-valued function of the vector-valued variable $\bf \Phi$, its  derivative is given by the Jacobian. The Jacobian for a robot arm with 4 joint angles is then:  
 $$
@@ -205,7 +205,7 @@ $$
                		-0.0026\\   5.9497\\ 0
                \end{bmatrix}.
 	\label{approxExampleNumerical}
-\end{align}	
+\end{align}
 $$
 
 
