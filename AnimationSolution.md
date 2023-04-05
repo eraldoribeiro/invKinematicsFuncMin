@@ -26,12 +26,12 @@ Here, ${\bf g} = \left(x_g, y_g, z_g\right)^\mathsf{T}$ is the *goal location*, 
 2. ${\bf e}_t \gets (e_x, e_y, e_z)^\mathsf{T}$                                      $\triangleright$ Current position of the end-effector
 3. ${\bf g} \gets (g_x, g_y, g_z)^\mathsf{T}$                                       $\triangleright$ Location of the goal (or target)
 4. $d \gets 0.01$                                                     $\triangleright$ Acceptable distance to the goal
-5. $\lambda = 0.1$                                                        $\triangleright$ Step of the gradient descent
+5. $\lambda \gets 0.1$                                                        $\triangleright$ Step of the gradient descent
 6. **while**   $\|{\bf e}_t - {\bf g}\| > d$       **do**: 
-7. >  $\Phi_{t+1} \gets \Phi_{t}- \lambda \nabla C(\Phi_t)$                      $\triangleright$ Calculate the new joint-angle configuration 
-8. > `drawRobotArm`($\Phi_{t+1}$)                            $\triangleright$ Draw robot arm at the new configuration 
-9. >  ${\bf e}_t = {\bf e}\left(\Phi_{t+1}\right)$                                        $\triangleright$ Updated end-effector location  
-10. > $\Phi_{t} \gets \Phi_{t+1}$                                             $\triangleright$ Set current configuration to new configuration 
+7. > >  $\Phi_{t+1} \gets \Phi_{t}- \lambda \nabla C(\Phi_t)$                      $\triangleright$ Calculate the new joint-angle configuration 
+8. > > `drawRobotArm`($\Phi_{t+1}$)                            $\triangleright$ Draw robot arm at the new configuration 
+9. > > ${\bf e}_t \gets {\bf e}\left(\Phi_{t+1}\right)$                                        $\triangleright$ Updated end-effector location  
+10. > > $\Phi_{t} \gets \Phi_{t+1}$                                             $\triangleright$ Set current configuration to new configuration 
 11.   **end while**
 
 #### Gradient calculation
