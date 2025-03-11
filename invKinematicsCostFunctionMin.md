@@ -19,26 +19,32 @@ These notes are heavily based on the following coursework and tutorial materials
 ## The cost function and its components
 
 The animation is achieved by using the gradient-descent algorithm to solve the following minimization problem: 
+
 $$
 \begin{align}
 	\hat{\bf \Phi} = \arg_{{{\bf \Phi}}}\min  C\left({\bf \Phi}\right),
-	\label{simple_motion_min}
+	%\label{simple_motion_min}
 \end{align}
 $$
+
 where the cost function $C$ is defined by:
+
 $$
+
 \begin{align}
 	C\left({\bf \Phi}\right) = \underbrace{\|{\bf e}\left({\bf \Phi}\right) - {\bf g}\|}_{\text{goal attraction}} + \underbrace{\sum_{i=1}^{n} \mathcal{F}_R\left(\|{\bf e}\left({\bf \Phi}\right) - {\bf o}_i\|\right)}_{\text{obstacle-avoidance penalty}} + \underbrace{\sum_{j=1}^{3} \mathcal{L}\left(\phi_j\right)}_{\text{Joint-range limit}}.
-	\label{simple_motion}
+	%\label{simple_motion}
 \end{align}
 $$
+
 Here, ${\bf g} = \left(x_g, y_g, z_g\right)^\mathsf{T}$ is the *goal location*, ${\bf o}_i$ is the location of obstacle $i$. Function ${\bf e}\left({\bf \Phi}\right)$ computes the arm's *forward kinematics* and returns the location of the arm's tip ${\bf e} = \left( e_x, e_y, e_z \right)^\mathsf{T}$, i.e., the *end-effector,* given the arm's joint angles, ${\bf \Phi} = \left( \phi_1, \phi_2,  \phi_3, \phi_4\right)^\mathsf{T}$.   Function $\mathcal{F}_R$ is a collision-avoidance penalty field. It penalizes poses that take the end effector too close to an obstacle, i.e., beyond a pre-defined distance $R$. The third component of Equation $\ref{simple_motion}$  limits the range of each joint angle. Function $\mathcal{L}$ is another penalty function. Its value increases as the joint angle $\phi_j$ approaches its maximum or minimum limit. Outside these limits, $\mathcal{L}$ vanishes. 
 
 Next, we describe the components of Equation $\ref{simple_motion}$ in more detail. 
 
 ### The attraction term
 
-The goal attraction term guides the animation towards the goal location. Since its equation is the Euclidean norm (or Euclidean distance), the minimal solution path when disregarding obstacles and joint range limits is a straight line from the end-effector's current location to the goal location.   
+The goal attraction term guides the animation towards the goal location. Since its equation is the Euclidean norm (or Euclidean distance), the minimal solution path when disregarding obstacles and joint range limits is a straight line from the end-effector's current location to the goal location.  
+
 $$
 \begin{align}
 	C_1\left({\bf \Phi}\right) = \|{\bf e}\left({\bf \Phi}\right) - {\bf g}\|
@@ -48,6 +54,7 @@ $$
 ### The field potential function for obstacle avoidance
 
 The field potential is a *penalty term* that increases its value as the end effector approaches an obstacle. It is defined as follows: 
+
 $$
 \begin{align}
         \mathcal{F}_R\left(d\right) = 
@@ -55,9 +62,10 @@ $$
 		\ln\left(R/d\right), & 0 < d \leq R,\\
 		0,                         &d > R.
 	\end{cases}
-	\label{field_function1}
+	%\label{field_function1}
 \end{align}	
 $$
+
 An example of the field potential in $\ref{field_function1}$ is shown in Figure 2.
 
 <img src="figs/field1D.png" alt="field1D" style="zoom:20%;" /><img src="figs/field2D.png" alt="field2D" style="zoom:20%;" />
@@ -67,6 +75,7 @@ An example of the field potential in $\ref{field_function1}$ is shown in Figure 
 ###The range-of-motion limit function  
 
 The limit function constrains the range of motion of the joints (i.e., angles), and is given by: 
+
 $$
 \begin{align}
         \mathcal{L}\left(\phi\right) = 
@@ -75,9 +84,10 @@ $$
 		0,                         & \phi_\text{min} + \delta < \phi < \phi_\text{max} - \delta\\
 		\ln\left(\delta/\left(\phi_\text{max} - \phi\right)\right), & \phi_\text{max} - \delta \leq \phi < \phi_\text{max},\\
 	\end{cases}
-	\label{limit_function}
+	%\label{limit_function}
 \end{align}
 $$
+
 where $\phi$ is the joint angle, $\phi_\text{min}$ and $\phi_\text{max}$ are the limits of that joint, and $\delta$ is the angular distance from each of the limits after which the limit function vanishes.  Figure 3 shows an example of the limit function for $\delta = 45\degree$, $\phi_{\text{min}} = 90\degree$, and $\phi_{\text{max}} = 270\degree$.
 
 
