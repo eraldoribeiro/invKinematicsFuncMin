@@ -30,7 +30,6 @@ $$
 where the cost function $C$ is defined by:
 
 $$
-
 \begin{align}
 	C\left({\bf \Phi}\right) = \underbrace{\|{\bf e}\left({\bf \Phi}\right) - {\bf g}\|}_{\text{goal attraction}} + \underbrace{\sum_{i=1}^{n} \mathcal{F}_R\left(\|{\bf e}\left({\bf \Phi}\right) - {\bf o}_i\|\right)}_{\text{obstacle-avoidance penalty}} + \underbrace{\sum_{j=1}^{3} \mathcal{L}\left(\phi_j\right)}_{\text{Joint-range limit}}.
 	%\label{simple_motion}
