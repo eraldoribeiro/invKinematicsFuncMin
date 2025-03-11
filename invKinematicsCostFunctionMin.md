@@ -72,7 +72,7 @@ An example of the field potential in $\ref{field_function1}$ is shown in Figure 
 
 **Figure 2:** Penalty field function for $R=10$.  **Left**: One-dimensional plot of the penalty function. Penalty value increases for distances close to the obstacle. **Right**: 2-D representation of the field function for $d = \sqrt{x^2 + y^2}$, i.e., distance from any point $(x,y)$ to the origin. When the  distance from obstacle is larger than $R$, the field potential vanishes. 
 
-###The range-of-motion limit function  
+### The range-of-motion limit function  
 
 The limit function constrains the range of motion of the joints (i.e., angles), and is given by: 
 
